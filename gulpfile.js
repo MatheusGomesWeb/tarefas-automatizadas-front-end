@@ -157,7 +157,7 @@ function createFileGitignore(callback) {
 // cria o arquivo index.html
 function createFileIndexHtml(callback) {
 
-    fs.appendFileSync('index.html', '');
+    fs.writeFileSync('index.html', '');
 
     callback();
 }
@@ -169,7 +169,7 @@ function createFileIndexHtml(callback) {
 // cria o arquivo README.md com nome do projeto
 function createFileReadmeMD(callback) {
 
-    fs.appendFileSync('README.md', '# ' + settings.projectName);
+    fs.writeFileSync('README.md', '# ' + settings.projectName);
 
     callback();
 }
