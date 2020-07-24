@@ -1,0 +1,27 @@
+{
+  "name": "minhas-taferas-automatizadas-gulp",
+  "version": "1.0.0",
+  "description": "Minhas Tarefas Automatizasas do Gulp",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MatheusGomesWeb/minhas-taferas-automatizadas-gulp.git"
+  },
+  "keywords": [
+    "tarefas",
+    "automatizadas",
+    "gulp"
+  ],
+  "author": "Matheus Gomes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MatheusGomesWeb/minhas-taferas-automatizadas-gulp/issues"
+  },
+  "homepage": "https://github.com/MatheusGomesWeb/minhas-taferas-automatizadas-gulp#readme",
+  "devDependencies": {
+    "gulp": "^4.0.2"
+  }
+}

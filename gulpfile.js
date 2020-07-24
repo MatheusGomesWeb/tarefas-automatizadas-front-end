@@ -13,7 +13,8 @@ const settings = {
     git_ignore: [
         '.vscode',
         'node_modules',
-        'package-lock.json'
+        'package-lock.json',
+        'index.html'     
     ]
 };
 
