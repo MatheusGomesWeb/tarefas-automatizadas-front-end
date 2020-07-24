@@ -25,36 +25,51 @@ const settings = {
         * Estas pastas são do codigo fonte e arquivos frontend do projeto, onde ficam os codigos fontes e arquivos de desenvolvimento.
     */
     sourceFolders: {
-
         source: './src', // source folder
-        frontend: './src/frontend', // frontend folder
-        css: './src/frontend/css', // stylesheets
-        js: './src/frontend/js', // javscripts
-        images: './src/frontend/img', // images
-        sass: './src/frontend/sass', // sass
-        libs: './src/frontend/libs',  // libs: jquery, bootstrap etc...
-
+        frontend: './src/frontend/', // frontend folder
+        css: './src/frontend/css/', // stylesheets
+        js: './src/frontend/js/', // javscripts
+        images: './src/frontend/img/', // images
+        sass: './src/frontend/sass/', // sass
+        libs: './src/frontend/libs/',  // libs: jquery, bootstrap etc...
     },
 
     /* 
         * Estas pastas são do codigo fonte e arquivos BACKEND do projeto.
     */
     sourceFoldersBackend: {
-        source: './src/backend' // backend files
+        source: './src/backend/' // backend files
     },
 
     /* 
         * Estas pastas são do codigo fonte e arquivos finais do projeto, onde é o resultado do processamento do codigo de desenvolvimento.
     */
     publicFolders: {
+        frontend: './public/', // frontend folder
+        css: './public/css/', // stylesheets
+        js: './public/js/', // javscripts
+        images: './public/img/', // images
+        sass: './public/sass/', // sass
+        libs: './public/libs/',  // libs: jquery, bootstrap etc...
+    },
 
-        frontend: './public', // frontend folder
-        css: './public/css', // stylesheets
-        js: './public/js', // javscripts
-        images: './public/img', // images
-        sass: './public/sass', // sass
-        libs: './public/libs',  // libs: jquery, bootstrap etc...
+    /*    
+     ####### ARQUIVOS DO PROJETO ####### 
 
+         * Arquivos de desenvolvimento do projeto
+    */
+    cssFiles: {
+        css: 'style.css', // stylesheets
+        cssReset: 'reset.css', // stylesheets
+        cssMediaQueries: 'mediaqueries.css', // stylesheets
+    },
+
+    jsFiles: {
+        js: 'functions.js' // javscripts
+    },
+
+    sassFiles: {
+        sass: 'style.scss' // sass
     }
 
 };
@@ -63,7 +78,9 @@ const settings = {
  * ####### MANIPULAÇÃO DE PASTAS. ####### *
  ******************************************/
 
-// cria estrutura das pastas
+/*
+    * cria estrutura das pastas
+ */
 function createAllFolders(callback) {
 
     // converse os atributos do objeto sourceFolders como um array 
@@ -91,7 +108,7 @@ function createAllFolders(callback) {
 
     });
 
-    // percorre os indices do array
+    // percorre os indices do array     
     backendFoldersArray.forEach(function ([item, index]) {
 
         // cria as pastas com o valor do indice do array
@@ -109,7 +126,9 @@ function createAllFolders(callback) {
 * ####### MANIPULAÇÃO DE ARQUIVOS. ####### *
 ********************************************/
 
-// cria o arquivo .gitignore com os valores definidos no array git_ignore.
+/*
+    * cria o arquivo .gitignore com os valores definidos no array git_ignore.
+*/
 function createFileGitignore(callback) {
 
     // caso não tenha valores definidos no array git_ignore, será criado um arquivo vazio.    
@@ -131,7 +150,9 @@ function createFileGitignore(callback) {
     callback();
 };
 
-//  ####### index.html ####### 
+/*
+    *  ####### index.html ####### 
+*/
 
 // cria o arquivo index.html
 function createFileIndexHtml(callback) {
@@ -141,7 +162,9 @@ function createFileIndexHtml(callback) {
     callback();
 }
 
-//  ####### README.md ####### 
+/*
+    * ####### README.md ####### 
+ */
 
 // cria o arquivo README.md com nome do projeto
 function createFileReadmeMD(callback) {
@@ -150,26 +173,108 @@ function createFileReadmeMD(callback) {
 
     callback();
 }
+
+/*
+    * ###### Criação de todos os arquivos Css
+*/
+
+function createAllFilesCss(callback) {
+
+    var cssFilesArray = Object.entries(settings.cssFiles);
+
+    cssFilesArray.forEach(function ([item, index]) {
+
+        fs.appendFileSync(settings.sourceFolders.css + index, '');
+
+    });
+
+    callback();
+}
+
+/*
+    * ###### Criação de todos os arquivos Sass
+*/
+
+function createAllFilesSass(callback) {
+
+    var sassFilesArray = Object.entries(settings.sassFiles);
+
+    sassFilesArray.forEach(function ([item, index]) {
+
+        fs.appendFileSync(settings.sourceFolders.sass + index, '');
+
+    });
+
+
+    callback();
+}
+
+/*
+    * ###### Criação de todos os arquivos Js
+*/
+
+function createAllFilesJs(callback) {
+
+    var jsFilesArray = Object.entries(settings.jsFiles);
+
+    jsFilesArray.forEach(function ([item, index]) {
+
+        fs.appendFileSync(settings.sourceFolders.js + index, '');
+
+    });
+
+
+    callback();
+}
+
+
+/*
+    * RESET PROJECT
+*/
+
+/*function resetProject(callback) {
+    fs.rmdirSync('./src/', );
+
+    callback();
+}*/
+
 /***************************
-* ####### Arquivos ####### *
+* ####### Exportando funções de manipulação de Arquivos ####### *
 ****************************/
 
 exports.createFileGitignore = createFileGitignore;
 exports.createFileIndexHtml = createFileIndexHtml;
 exports.createFileReadmeMD = createFileReadmeMD;
+exports.createAllFilesCss = createAllFilesCss;
+exports.createAllFilesSass = createAllFilesSass;
+exports.createAllFilesJs = createAllFilesJs;
 
 /************************
-* ####### Pastas ####### *
+* ####### Exportando funções de manipulação de Pastas ####### *
 **************************/
 
 exports.createAllFolders = createAllFolders;
 
 /************************
-* ####### DEFAULT ####### *
+* ####### START PROJECT ####### *
 **************************/
 
-exports.startProject = gulp.parallel(createFileGitignore, createFileIndexHtml, createFileReadmeMD, 
-                       gulp.series(createAllFolders, createAllFiles));
+exports.startProject = gulp.series(
+    createAllFolders,
+    createFileGitignore,
+    createFileIndexHtml,
+    createFileReadmeMD);
+
+exports.createAllFiles = gulp.parallel(
+    createAllFilesSass,
+    createAllFilesJs
+);
+
+//exports.resetProject = resetProject;
+
+/************************
+* ####### DEFAULT ####### *
+**************************/
 
 exports.default = function (callback) {
 
