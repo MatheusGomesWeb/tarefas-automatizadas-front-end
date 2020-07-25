@@ -33,3 +33,4 @@ ___
     - **minificarSass** - Minifica os arquivos sass.
     - **minificarJs** - Mifinica os arquicos js.
     - **minificarImages** - Reduz o tamanho das imagens.
+    - **prefixarCss** - Css Hacks para compatibilidade em navegadores antigos.
