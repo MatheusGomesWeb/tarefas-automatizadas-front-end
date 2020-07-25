@@ -22,6 +22,14 @@
   },
   "homepage": "https://github.com/MatheusGomesWeb/minhas-taferas-automatizadas-gulp#readme",
   "devDependencies": {
-    "gulp": "^4.0.2"
+    "gulp": "^4.0.2",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-minify": "^3.1.0",
+    "gulp-sass": "^4.1.0",
+    "node-sass": "^4.14.1"
+  },
+  "dependencies": {
+    "gulp-imagemin": "^7.1.0"
   }
 }

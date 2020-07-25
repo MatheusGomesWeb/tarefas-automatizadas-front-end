@@ -1,6 +1,15 @@
 const gulp = require('gulp');
 const fs = require('fs');
 
+// plugins e libs
+const imagemin = require('gulp-imagemin');
+const minify = require('gulp-minify');
+const cleancss = require('gulp-clean-css');
+const concat = require('gulp-concat');
+const sass = require('gulp-sass');
+
+sass.compiler = require('node-sass');
+
 const settings = {
 
     //  ####### Informações e Configurações ####### 
@@ -48,8 +57,7 @@ const settings = {
         frontend: './public/', // frontend folder
         css: './public/css/', // stylesheets
         js: './public/js/', // javscripts
-        images: './public/img/', // images
-        sass: './public/sass/', // sass
+        images: './public/img/',
         libs: './public/libs/',  // libs: jquery, bootstrap etc...
     },
 
@@ -69,7 +77,10 @@ const settings = {
     },
 
     sassFiles: {
-        sass: 'style.scss' // sass
+        sass: 'style.scss', // sass
+        sassReset: 'reset.scss',
+        sassMediaQueries: 'mediaqueries.scss',
+        sassColor: 'colors.scss'       
     }
 
 };
@@ -227,16 +238,62 @@ function createAllFilesJs(callback) {
     callback();
 }
 
+/******************************************
+ * ####### PLUGINS E LIBS. ####### *
+ ******************************************/
 
 /*
-    * RESET PROJECT
-*/
+    * minificar imagens
+ */
 
-/*function resetProject(callback) {
-    fs.rmdirSync('./src/', );
+function minificarImages(callback) {
+
+    gulp.src(settings.sourceFolders.images+'*')
+    .pipe(imagemin())
+    .pipe(gulp.dest(settings.publicFolders.images));
 
     callback();
-}*/
+}
+
+/*
+    * minificar javascript
+ */
+
+function minificarJs(callback) {
+
+    gulp.src(settings.sourceFolders.js+'*.js')
+    .pipe(minify())
+    .pipe(gulp.dest(settings.publicFolders.js));
+
+    callback();
+}
+
+/*
+    * minificar css
+ */
+
+function minificarCss(callback) {
+
+    gulp.src(settings.sourceFolders.css+'*.css')
+    .pipe(cleancss())
+    .pipe(gulp.dest(settings.publicFolders.css));
+
+    callback();
+}
+
+/*
+    * minificar sass
+ */
+
+function minificarSass(callback) {
+
+    gulp.src(settings.sourceFolders.sass+'*.scss')
+    .pipe(concat('style.css'))
+    .pipe(sass({outputStyle: 'compressed'}).on('error',sass.logError))
+    .pipe(gulp.dest(settings.publicFolders.css));
+
+    callback();
+}
 
 /***************************
 * ####### Exportando funções de manipulação de Arquivos ####### *
@@ -254,6 +311,15 @@ exports.createAllFilesJs = createAllFilesJs;
 **************************/
 
 exports.createAllFolders = createAllFolders;
+
+/************************
+* ####### PLUGINS E LIBS ####### *
+**************************/
+
+exports.minificarImages = minificarImages;
+exports.minificarJs = minificarJs;
+exports.minificarCss = minificarCss;
+exports.minificarSass = minificarSass;
 
 /************************
 * ####### START PROJECT ####### *
