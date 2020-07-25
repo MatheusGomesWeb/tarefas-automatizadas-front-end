@@ -7,6 +7,7 @@ const minify = require('gulp-minify');
 const cleancss = require('gulp-clean-css');
 const concat = require('gulp-concat');
 const sass = require('gulp-sass');
+const autoprefixer = require('gulp-autoprefixer');
 
 sass.compiler = require('node-sass');
 
@@ -80,7 +81,7 @@ const settings = {
         sass: 'style.scss', // sass
         sassReset: 'reset.scss',
         sassMediaQueries: 'mediaqueries.scss',
-        sassColor: 'colors.scss'       
+        sassColor: 'colors.scss'
     }
 
 };
@@ -248,9 +249,9 @@ function createAllFilesJs(callback) {
 
 function minificarImages(callback) {
 
-    gulp.src(settings.sourceFolders.images+'*')
-    .pipe(imagemin())
-    .pipe(gulp.dest(settings.publicFolders.images));
+    gulp.src(settings.sourceFolders.images + '*')
+        .pipe(imagemin())
+        .pipe(gulp.dest(settings.publicFolders.images));
 
     callback();
 }
@@ -261,9 +262,9 @@ function minificarImages(callback) {
 
 function minificarJs(callback) {
 
-    gulp.src(settings.sourceFolders.js+'*.js')
-    .pipe(minify())
-    .pipe(gulp.dest(settings.publicFolders.js));
+    gulp.src(settings.sourceFolders.js + '*.js')
+        .pipe(minify())
+        .pipe(gulp.dest(settings.publicFolders.js));
 
     callback();
 }
@@ -272,14 +273,14 @@ function minificarJs(callback) {
     * minificar css
  */
 
-function minificarCss(callback) {
+/*function minificarCss(callback) {
 
-    gulp.src(settings.sourceFolders.css+'*.css')
-    .pipe(cleancss())
-    .pipe(gulp.dest(settings.publicFolders.css));
+    gulp.src(settings.sourceFolders.css + '*.css')
+        .pipe(cleancss())
+        .pipe(gulp.dest(settings.publicFolders.css));
 
     callback();
-}
+}*/
 
 /*
     * minificar sass
@@ -287,14 +288,34 @@ function minificarCss(callback) {
 
 function minificarSass(callback) {
 
-    gulp.src(settings.sourceFolders.sass+'*.scss')
-    .pipe(concat('style.css'))
-    .pipe(sass({outputStyle: 'compressed'}).on('error',sass.logError))
-    .pipe(gulp.dest(settings.publicFolders.css));
+    gulp.src(settings.sourceFolders.sass + '*.scss')
+        .pipe(concat('style.css'))
+        .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
+        .pipe(gulp.dest(settings.publicFolders.css));
 
     callback();
 }
 
+/*
+    * Autoprefixer CSS - compatibilidade navegadores
+ */
+
+function prefixarCss(callback) {
+
+    var processos = [
+
+    ];
+
+    gulp.src(settings.sourceFolders.sass + '*.scss')
+        .pipe(autoprefixer({
+            overrideBrowserslist: ['last 99 versions'],
+            grid: "true",
+            cascade: false
+        }))
+        .pipe(gulp.dest(settings.sourceFolders.sass));
+
+    callback();
+}
 /***************************
 * ####### Exportando funções de manipulação de Arquivos ####### *
 ****************************/
@@ -318,11 +339,12 @@ exports.createAllFolders = createAllFolders;
 
 exports.minificarImages = minificarImages;
 exports.minificarJs = minificarJs;
-exports.minificarCss = minificarCss;
+//exports.minificarCss = minificarCss;
 exports.minificarSass = minificarSass;
+exports.prefixarCss = prefixarCss;
 
 /************************
-* ####### START PROJECT ####### *
+* ####### PROJECT ####### *
 **************************/
 
 exports.startProject = gulp.series(
@@ -334,6 +356,12 @@ exports.startProject = gulp.series(
 exports.createAllFiles = gulp.parallel(
     createAllFilesSass,
     createAllFilesJs
+);
+
+exports.minificarTudo = gulp.parallel(
+    minificarSass,
+    minificarJs,
+    minificarImages
 );
 
 //exports.resetProject = resetProject;
