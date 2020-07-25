@@ -7,6 +7,7 @@ ___
 - **Iniciar Projeto**
 
 - **startProject** - Cria os arquivos e pastas principais do projeto.
+- **createAllFiles** - Cria todos os arquivos.
 
 ___
 
