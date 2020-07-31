@@ -15,7 +15,7 @@ const settings = {
 
     //  ####### Informações e Configurações ####### 
 
-    projectName: 'Minhas Tarefas Automatizadas do Gulp',
+    projectName: 'Clube Magmaxx Cupom Desconto',
 
     /*
         ####### .gitignore ####### 
@@ -25,8 +25,7 @@ const settings = {
     git_ignore: [
         '.vscode',
         'node_modules',
-        'package-lock.json',
-        'index.html'
+        'package-lock.json'
     ],
 
     /*
@@ -40,8 +39,7 @@ const settings = {
         css: './src/frontend/css/', // stylesheets
         js: './src/frontend/js/', // javscripts
         images: './src/frontend/img/', // images
-        sass: './src/frontend/sass/', // sass
-        libs: './src/frontend/libs/',  // libs: jquery, bootstrap etc...
+        sass: './src/frontend/sass/' // sass
     },
 
     /* 
@@ -58,8 +56,7 @@ const settings = {
         frontend: './public/', // frontend folder
         css: './public/css/', // stylesheets
         js: './public/js/', // javscripts
-        images: './public/img/',
-        libs: './public/libs/',  // libs: jquery, bootstrap etc...
+        images: './public/img/'
     },
 
     /*    
@@ -81,7 +78,9 @@ const settings = {
         sass: 'style.scss', // sass
         sassReset: 'reset.scss',
         sassMediaQueries: 'mediaqueries.scss',
-        sassColor: 'colors.scss'
+        sassColor: 'colors.scss',
+        sassFonts: 'fonts.scss', // fontes
+        sassForms: 'forms.scss'
     }
 
 };
@@ -289,7 +288,12 @@ function minificarJs(callback) {
 function minificarSass(callback) {
 
     gulp.src(settings.sourceFolders.sass + '*.scss')
-        .pipe(concat('style.css'))
+        .pipe(autoprefixer({
+            overrideBrowserslist: ['last 99 versions'],
+            grid: "true",
+            cascade: false
+        }))
+        .pipe(concat('style.min.css'))
         .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
         .pipe(gulp.dest(settings.publicFolders.css));
 
