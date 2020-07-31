@@ -2,20 +2,14 @@
 
 ## Tarefas Disponíveis
 
-___
-
 - **Iniciar Projeto**
 
 - **startProject** - Cria os arquivos e pastas principais do projeto.
 - **createAllFiles** - Cria todos os arquivos.
 
-___
-
 - **Pastas**
 
   - **createAllFolders** - Cria toda a estrutura de pastas do projeto.
-
-___
 
 - **Arquivos**
 
@@ -25,8 +19,6 @@ ___
     - **createAllFilesCss** - Cria todos os arquivos Css.
     - **createAllFilesJs** - Cria todos os arquivos Js.
     - **createAllFilesSass** - Cria todos os arquivos SASS.
-
-___
 
 - **Tarefas de Plugins**
 
