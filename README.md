@@ -8,15 +8,15 @@ Minhas Tarefas Automatizadas Gulp
 </h1>
 
 <p align="center">
-  Crie uma estrutura organizada de pastas para projetos front-end com um comando, Minifique arquivos Sass, JavaScript, Reduza o tamanho das imagens, e Monitore alterações em arquivos e imagens automaticamente e veja o resultado no Browser em tempo real com a ferramenta BrowserSync. 
+  Crie uma estrutura organizada de pastas para projetos front-end com apenas um comando, Minifique arquivos Sass, JavaScript, Reduza o tamanho das imagens, e Monitore alterações em arquivos e imagens visualizando o resultado no Browser em tempo real com a ferramenta BrowserSync. 
 </p>
 
 <p align="center"><b>Status</b> Finalizado</p>
 
 <p align="center">
- <a href="#pre-requisitos">Pré-Requisitos</a> •
- <a href="#instalacao">Instalação</a> • 
- <a href="#configuracoes">Configurações</a> • 
+ <a href="#pré-requisitos">Pré-Requisitos</a> •
+ <a href="#instalação">Instalação</a> • 
+ <a href="#onfiguração">Configurações</a> • 
  <a href="#como-utilizar">Como Utilizar</a> • 
  <a href="#autor">Autor</a> • 
  <a href="#memo-licença">Licença</a>
@@ -24,7 +24,7 @@ Minhas Tarefas Automatizadas Gulp
 
 ___
 
-### Pré - Requisitos
+### Pré-Requisitos
 
 * [Node.js](https://nodejs.org/en/)
 * [NPM](https://www.npmjs.com/) ou [Yarn](https://yarnpkg.com/)
