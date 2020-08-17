@@ -43,6 +43,8 @@ ___
 git clone https://github.com/MatheusGomesWeb/minhas-taferas-automatizadas-gulp.git
 ```
 
+___
+
 #### Instale as dependencias do projeto
 
 ``` 
@@ -52,6 +54,8 @@ NPM -> npm install
 ``` 
 YARN -> yarn install
 ```
+
+___
 
 ### Configuração
 
@@ -69,6 +73,8 @@ publicFolders: Arquivos finais que são resultado do processamento das tarefas.
 jsFiles: Arquivos JavaScript que serão criados automaticamente.
 sassFiles: Arquivos Sass que serão criados automaticamente.
 ```
+
+___
 
 ### Como Utilizar
 
@@ -110,6 +116,8 @@ gulp watch
   + **browserSync**: Inicia um servidor com **LiveReload**.
   + **watch**: Monitora todos os arquivos .html, .scss, .js e imagens, caso tenha alguma alteração ele compila, minifica, ou reduz o tamanho dos arquivos / imagens de acordo com a ação realizada.
 
+___
+
 ### Autor
 
 <a href="https://github.com/MatheusGomesWeb">
@@ -128,6 +136,8 @@ Feito com ❤️ por Matheus Gomes 👋🏽 Entre em contato!
  <a href="https://www.facebook.com/matheusgomesrdj/" target="_blank">
 <img src="https://img.shields.io/badge/-MatheusGomes-%234267b2?style=flat-square&logo=facebook&logoColor=white&link=https://www.facebook.com/matheusgomesrdj/"/>
 </a>
+
+___
 
 ### :memo: Licença
 
