@@ -1,3 +1,4 @@
+//Gulp
 const gulp = require('gulp');
 
 //Node File System
@@ -14,7 +15,6 @@ const browser_sync = require('browser-sync').create(); // Inicia um servidor e m
 
 // arquivo de configuração
 const settings = require('./settings');
-const { parallel } = require('gulp');
 
 // Browser-Sync
 function browserSync() {
@@ -104,11 +104,6 @@ function createAllFilesSass(callback) {
 
 // Cria os arquivos da pasta ROOT - index, README.md e .gitignore
 function createRootFiles(callback) {
-
-    /* fs.writeFileSync('index.html', '');
-     fs.writeFileSync('README.md', '# ' + settings.projectName);
- 
-     createFileGitignore();*/
 
     let fileIndexHtml = fs.existsSync(settings.rootFolder + 'index.html');
     let fileReadme = fs.existsSync(settings.rootFolder + 'README.md');
@@ -201,4 +196,4 @@ exports.default = gulp.series(createRootFiles, createAllFolders);
 exports.generateFiles = gulp.parallel(createAllFilesSass, createAllFilesJs);
 
 // Monitora alterações nos arquivos (.html, .scss, .js) e imagens (.jpg, .png, .gif, .svg etc...)
-exports.watch = parallel(browserSync, watch);
+exports.watch = gulp.parallel(browserSync, watch);
