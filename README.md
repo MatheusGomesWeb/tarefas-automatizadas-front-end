@@ -16,7 +16,7 @@ Minhas Tarefas Automatizadas Gulp
 <p align="center">
  <a href="#pré-requisitos">Pré-Requisitos</a> •
  <a href="#instalação">Instalação</a> • 
- <a href="#onfiguração">Configurações</a> • 
+ <a href="#configuração">Configurações</a> • 
  <a href="#como-utilizar">Como Utilizar</a> • 
  <a href="#autor">Autor</a> • 
  <a href="#memo-licença">Licença</a>
