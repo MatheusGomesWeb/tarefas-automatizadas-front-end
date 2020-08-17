@@ -9,6 +9,7 @@ const gulp_uglify = require('gulp-uglify'); // Minificar JavaScript
 const gulp_sass = require('gulp-sass'); // Minificar Sass
 const gulp_concat = require('gulp-concat'); // Junta varios arquivos em apenas um arquivo final.
 const gulp_autoprefixer = require('gulp-autoprefixer'); // Adiciona tags do css para compatibilidade com browsers antigos.
+const gulp_babel = require('gulp-babel'); // Converte JavaScript Moderno para funcionar em navegadores antigos.
 
 // arquivo de configuração
 const settings = require('./settings');
@@ -116,6 +117,10 @@ function minifyImages(callback) {
 // Minificar JavaScript - Gulp-Uglify
 function minifyJs(callback) {
     gulp.src(settings.sourceFolders.js + '*.js')
+        .pipe(gulp_concat('bundle.js'))
+        .pipe(gulp_babel({
+            presets: ['env']
+        }))
         .pipe(gulp_uglify())
         .pipe(gulp.dest(settings.publicFolders.js));
 
@@ -143,5 +148,4 @@ function minifySass(callback) {
 exports.default = gulp.series(createRootFiles, createAllFolders);
 exports.generateFiles = gulp.parallel(createAllFilesSass, createAllFilesJs);
 //exports.watchFiles = gulp.parallel();
-
-exports.minifySass = minifySass;
+exports.minifyJs = minifyJs;
