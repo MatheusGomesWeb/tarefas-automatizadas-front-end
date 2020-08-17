@@ -10,9 +10,20 @@ const gulp_sass = require('gulp-sass'); // Minificar Sass
 const gulp_concat = require('gulp-concat'); // Junta varios arquivos em apenas um arquivo final.
 const gulp_autoprefixer = require('gulp-autoprefixer'); // Adiciona tags do css para compatibilidade com browsers antigos.
 const gulp_babel = require('gulp-babel'); // Converte JavaScript Moderno para funcionar em navegadores antigos.
+const browser_sync = require('browser-sync').create(); // Inicia um servidor e monitora alterações nos arquivos e atualiza o navegador automaticamente.
 
 // arquivo de configuração
 const settings = require('./settings');
+const { parallel } = require('gulp');
+
+// Browser-Sync
+function browserSync() {
+    browser_sync.init({
+        server: {
+            baseDir: settings.rootFolder
+        }
+    });
+}
 
 // ****** Funções para criação de pastas *******
 
@@ -94,10 +105,27 @@ function createAllFilesSass(callback) {
 // Cria os arquivos da pasta ROOT - index, README.md e .gitignore
 function createRootFiles(callback) {
 
-    fs.writeFileSync('index.html', '');
-    fs.writeFileSync('READMedeE.md', '# ' + settings.projectName);
+    /* fs.writeFileSync('index.html', '');
+     fs.writeFileSync('README.md', '# ' + settings.projectName);
+ 
+     createFileGitignore();*/
 
-    createFileGitignore();
+    let fileIndexHtml = fs.existsSync(settings.rootFolder + 'index.html');
+    let fileReadme = fs.existsSync(settings.rootFolder + 'README.md');
+    let fileGitignore = fs.existsSync(settings.rootFolder + '.gitignore');
+
+    if (fileIndexHtml || fileReadme || fileGitignore) {
+        console.log("Os arquivos index.html, readme.md, .gitignore ja existem, delete-os para gera-los novamente.");
+    } else {
+
+        // Gerando os arquivos    
+        fs.writeFileSync('index.html', '');
+        fs.writeFileSync('README.md', '# ' + settings.projectName);
+
+        createFileGitignore();
+
+        console.log("Arquivos criados com sucesso !")
+    }
 
     callback();
 }
@@ -109,20 +137,23 @@ function minifyImages(callback) {
 
     gulp.src(settings.sourceFolders.images + '*')
         .pipe(gulp_imagemin())
-        .pipe(gulp.dest(settings.publicFolders.images));
+        .pipe(gulp.dest(settings.publicFolders.images))
+        .pipe(browser_sync.stream());
 
     callback();
 }
 
 // Minificar JavaScript - Gulp-Uglify
 function minifyJs(callback) {
+
     gulp.src(settings.sourceFolders.js + '*.js')
         .pipe(gulp_concat('bundle.js'))
         .pipe(gulp_babel({
             presets: ['env']
         }))
         .pipe(gulp_uglify())
-        .pipe(gulp.dest(settings.publicFolders.js));
+        .pipe(gulp.dest(settings.publicFolders.js))
+        .pipe(browser_sync.stream());
 
     callback();
 }
@@ -140,12 +171,34 @@ function minifySass(callback) {
             outputStyle: 'expanded'
         }))
         .pipe(gulp_concat('style.min.css'))
-        .pipe(gulp.dest(settings.publicFolders.css));
+        .pipe(gulp.dest(settings.publicFolders.css))
+        .pipe(browser_sync.stream());
 
     callback();
 }
 
+// Monitorando alterações nos arquivos (.html, .scss, .js) e imagens (.jpg, .png, .gif, .svg etc...)
+function watch() {
+
+    // Monitorando JavaScript
+    gulp.watch(settings.sourceFolders.js + '*.js', minifyJs);
+
+    // Monitorando Sass
+    gulp.watch(settings.sourceFolders.sass + '*.scss', minifySass);
+
+    // Monitorando Imagens
+    gulp.watch(settings.sourceFolders.images + '*', minifyImages);
+
+    // Monitorando Html
+    gulp.watch(settings.rootFolder + '*.html').on('change', browser_sync.reload);
+
+}
+
+// default task
 exports.default = gulp.series(createRootFiles, createAllFolders);
+
+// gera os arquivos sass e javascript
 exports.generateFiles = gulp.parallel(createAllFilesSass, createAllFilesJs);
-//exports.watchFiles = gulp.parallel();
-exports.minifyJs = minifyJs;
+
+// Monitora alterações nos arquivos (.html, .scss, .js) e imagens (.jpg, .png, .gif, .svg etc...)
+exports.watch = parallel(browserSync, watch);
