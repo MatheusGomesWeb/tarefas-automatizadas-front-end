@@ -14,7 +14,7 @@ const settings = require('./settings');
 
 // ****** Funções para criação de pastas *******
 
-// * cria estrutura das pastas
+// cria estrutura das pastas
 function createAllFolders(callback) {
 
     // converte os atributos do objeto sourceFolders como um array 
@@ -43,7 +43,7 @@ function createAllFolders(callback) {
 
 // ****** Funções para criação de arquivos *******
 
-// * cria o arquivo .gitignore com os valores definidos no array git_ignore.
+// cria o arquivo .gitignore com os valores definidos no array git_ignore.
 function createFileGitignore() {
 
     // caso não tenha valores definidos no array git_ignore, será criado um arquivo vazio.    
@@ -60,6 +60,20 @@ function createFileGitignore() {
         fs.appendFileSync(__dirname + '/.gitignore', '');
     }
 };
+
+// Criação de todos os arquivos JS
+function createAllFilesJs(callback) {
+
+    let jsFilesArray = Object.entries(settings.jsFiles);
+
+    jsFilesArray.forEach(function ([item, index]) {
+
+        fs.appendFileSync(settings.sourceFolders.js + index, '');
+
+    });
+
+    callback();
+}
 
 // Cria os arquivos Sass
 function createAllFilesSass(callback) {
@@ -86,4 +100,18 @@ function createRootFiles(callback) {
     callback();
 }
 
-exports.default = gulp.series(createRootFiles, createAllFolders, createAllFilesSass);
+// ****** Bibliotecas *******
+
+// Minificar Imagens - Imagemin
+function minifyImages(callback) {
+
+    gulp.src(settings.sourceFolders.images + '*')
+        .pipe(imagemin())
+        .pipe(gulp.dest(settings.publicFolders.images));
+
+    callback();
+}
+
+exports.default = gulp.series(createRootFiles, createAllFolders);
+exports.generateFiles = gulp.parallel(createAllFilesSass, createAllFilesJs);
+//exports.watchFiles = gulp.parallel();
