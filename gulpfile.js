@@ -4,17 +4,18 @@ const gulp = require('gulp');
 const fs = require('fs');
 
 // plugins e libs
-const imagemin = require('gulp-imagemin');
-const concat = require('gulp-concat');
-const sass = require('gulp-sass');
-const autoprefixer = require('gulp-autoprefixer');
+const gulp_imagemin = require('gulp-imagemin'); // Minificar Imagens - Reduzir tamanho das imagens
+const gulp_uglify = require('gulp-uglify'); // Minificar JavaScript
+const gulp_sass = require('gulp-sass'); // Minificar Sass
+const gulp_concat = require('gulp-concat'); // Junta varios arquivos em apenas um arquivo final.
+const gulp_autoprefixer = require('gulp-autoprefixer'); // Adiciona tags do css para compatibilidade com browsers antigos.
 
 // arquivo de configuração
 const settings = require('./settings');
 
 // ****** Funções para criação de pastas *******
 
-// cria estrutura das pastas
+// cria estrutura de pastas
 function createAllFolders(callback) {
 
     // converte os atributos do objeto sourceFolders como um array 
@@ -102,12 +103,39 @@ function createRootFiles(callback) {
 
 // ****** Bibliotecas *******
 
-// Minificar Imagens - Imagemin
+// Minificar Imagens - Gulp-Imagemin
 function minifyImages(callback) {
 
     gulp.src(settings.sourceFolders.images + '*')
-        .pipe(imagemin())
+        .pipe(gulp_imagemin())
         .pipe(gulp.dest(settings.publicFolders.images));
+
+    callback();
+}
+
+// Minificar JavaScript - Gulp-Uglify
+function minifyJs(callback) {
+    gulp.src(settings.sourceFolders.js + '*.js')
+        .pipe(gulp_uglify())
+        .pipe(gulp.dest(settings.publicFolders.js));
+
+    callback();
+}
+
+// Minificar Sass - Gulp-Sass
+function minifySass(callback) {
+
+    gulp.src(settings.sourceFolders.sass + '*.scss')
+        .pipe(gulp_autoprefixer({
+            overrideBrowserslist: ['last 99 versions'],
+            grid: "true",
+            cascade: false
+        }))
+        .pipe(gulp_sass({
+            outputStyle: 'expanded'
+        }))
+        .pipe(gulp_concat('style.min.css'))
+        .pipe(gulp.dest(settings.publicFolders.css));
 
     callback();
 }
@@ -115,3 +143,5 @@ function minifyImages(callback) {
 exports.default = gulp.series(createRootFiles, createAllFolders);
 exports.generateFiles = gulp.parallel(createAllFilesSass, createAllFilesJs);
 //exports.watchFiles = gulp.parallel();
+
+exports.minifySass = minifySass;
