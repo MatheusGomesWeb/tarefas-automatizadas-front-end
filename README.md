@@ -28,7 +28,7 @@ ___
 
 * [Node.js](https://nodejs.org/en/)
 * [NPM](https://www.npmjs.com/) ou [Yarn](https://yarnpkg.com/)
-* Básico de Gulp
+* Básico de [Gulp](https://gulpjs.com/)
 
 ___
 
