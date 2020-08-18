@@ -130,7 +130,7 @@ function createRootFiles(callback) {
 // Minificar Imagens - Gulp-Imagemin
 function minifyImages(callback) {
 
-    gulp.src(settings.sourceFolders.images + '*')
+    gulp.src(settings.sourceFolders.images + '**/*')
         .pipe(gulp_imagemin())
         .pipe(gulp.dest(settings.publicFolders.images))
         .pipe(browser_sync.stream());
