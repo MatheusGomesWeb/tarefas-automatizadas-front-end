@@ -14,6 +14,7 @@ Minhas Tarefas Automatizadas Gulp
 <p align="center"><b>Status</b> Finalizado</p>
 
 <p align="center">
+ <a href="#bibliotecas-utilizadas">Bibliotecas Utilizadas</a> •
  <a href="#pré-requisitos">Pré-Requisitos</a> •
  <a href="#instalação">Instalação</a> • 
  <a href="#configuração">Configurações</a> • 
@@ -21,6 +22,17 @@ Minhas Tarefas Automatizadas Gulp
  <a href="#autor">Autor</a> • 
  <a href="#memo-licença">Licença</a>
 </p>
+___
+
+### Bibliotecas utilizadas
+
+* [Imagemin](https://www.npmjs.com/package/gulp-imagemin)
+* [Uglify](https://www.npmjs.com/package/gulp-uglify)
+* [Sass](https://www.npmjs.com/package/gulp-sass)
+* [Concat](https://www.npmjs.com/package/gulp-concat)
+* [AutoPrefixer](https://www.npmjs.com/package/gulp-autoprefixer)
+* [Babel](https://www.npmjs.com/package/gulp-babel)
+* [BrowserSync](https://www.npmjs.com/package/browser-sync)
 
 ___
 
