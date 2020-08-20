@@ -22,6 +22,7 @@ Minhas Tarefas Automatizadas Gulp
  <a href="#autor">Autor</a> • 
  <a href="#memo-licença">Licença</a>
 </p>
+
 ___
 
 ### Bibliotecas utilizadas
