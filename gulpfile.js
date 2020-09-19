@@ -154,22 +154,22 @@ function minifyJs(callback) {
 }
 
 // Minificar Sass - Gulp-Sass
-function minifySass(callback) {
+function minifySass() {
 
     gulp.src(settings.sourceFolders.sass + '*.scss')
-        .pipe(gulp_autoprefixer({
-            overrideBrowserslist: ['last 99 versions'],
-            grid: "true",
-            cascade: false
-        }))
         .pipe(gulp_sass({
             outputStyle: 'expanded'
         }))
+        .pipe(gulp_autoprefixer({
+            cascade: false,
+            grid: "autoplace",
+            flexbox: true,
+            overrideBrowserslist: ['last 99 versions']
+        }))
+
         .pipe(gulp_concat('style.min.css'))
         .pipe(gulp.dest(settings.publicFolders.css))
         .pipe(browser_sync.stream());
-
-    callback();
 }
 
 // Monitorando alterações nos arquivos (.html, .scss, .js) e imagens (.jpg, .png, .gif, .svg etc...)
@@ -197,3 +197,5 @@ exports.generateFiles = gulp.parallel(createAllFilesSass, createAllFilesJs);
 
 // Monitora alterações nos arquivos (.html, .scss, .js) e imagens (.jpg, .png, .gif, .svg etc...)
 exports.watch = gulp.parallel(browserSync, watch);
+
+exports.minifySass = minifySass;
