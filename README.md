@@ -4,7 +4,7 @@
 </p>
 
 <h1 align="center">
-Minhas Tarefas Automatizadas Gulp
+Tarefas Automatizadas Gulp
 </h1>
 
 <p align="center">
