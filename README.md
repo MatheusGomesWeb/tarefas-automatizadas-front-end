@@ -7,7 +7,7 @@
 <br>
 
 <h1 align="center">
-Tarefas Automatizadas Gulp
+Tarefas Automatizadas Front End
 </h1>
 
 <p align="center">
