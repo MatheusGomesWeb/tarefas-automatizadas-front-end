@@ -1,32 +1,38 @@
 {
-  "name": "minhas-taferas-automatizadas-gulp",
+  "name": "minhas-taferas-automatizadas-front-end",
   "version": "1.0.0",
-  "description": "Minhas Tarefas Automatizasas do Gulp",
+  "description": "Minhas Tarefas Automatizadas Front End",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "webpack --mode=development",
+    "build": "webpack --mode=production"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MatheusGomesWeb/minhas-taferas-automatizadas-gulp.git"
+    "url": "git+https://github.com/MatheusGomesWeb/minhas-taferas-automatizadas-front-end.git"
   },
   "keywords": [
     "tarefas",
     "automatizadas",
-    "gulp"
+    "front-end"
   ],
   "author": "Matheus Gomes",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/MatheusGomesWeb/minhas-taferas-automatizadas-gulp/issues"
+    "url": "https://github.com/MatheusGomesWeb/minhas-taferas-automatizadas-front-end/issues"
   },
-  "homepage": "https://github.com/MatheusGomesWeb/minhas-taferas-automatizadas-gulp#readme",
+  "homepage": "https://github.com/MatheusGomesWeb/minhas-taferas-automatizadas-front-end#readme",
   "dependencies": {
+    "browser-sync": "^2.26.12",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0.1",
     "gulp-concat": "^2.6.1",
+    "gulp-imagemin": "^7.1.0",
     "gulp-sass": "^4.1.0",
-    "browser-sync": "^2.26.12",
-    "gulp-imagemin": "^7.1.0"
+    "webpack": "^5.8.0",
+    "webpack-cli": "^4.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.14.0"
   }
 }
