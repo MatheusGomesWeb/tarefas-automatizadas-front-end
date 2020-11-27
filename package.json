@@ -22,17 +22,11 @@
   },
   "homepage": "https://github.com/MatheusGomesWeb/minhas-taferas-automatizadas-gulp#readme",
   "dependencies": {
-    "@babel/core": "^7.11.1",
-    "@babel/preset-env": "^7.11.0",
-    "babel-core": "^6.26.3",
-    "babel-preset-env": "^1.7.0",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0.1",
-    "gulp-babel": "^7.0.1",
     "gulp-concat": "^2.6.1",
     "gulp-sass": "^4.1.0",
     "browser-sync": "^2.26.12",
-    "gulp-imagemin": "^7.1.0",
-    "gulp-uglify": "^3.0.2"
+    "gulp-imagemin": "^7.1.0"
   }
 }
