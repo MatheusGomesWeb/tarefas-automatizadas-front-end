@@ -1,13 +1,17 @@
-<p align="center">  
-<img src="./readme/gulp.png" alt="Gulp"/>
-</p>
+<div align="center">  
+<img src="./readme/gulp.png" alt="Gulp" height="80"/>
+<img src="./readme/eslint.png" alt="Eslint" height="40"/>
+<img src="./readme/webpack.png" alt="Webpack" height="80"/>
+</div>
+
+<br>
 
 <h1 align="center">
 Tarefas Automatizadas Gulp
 </h1>
 
 <p align="center">
-  Crie uma estrutura organizada de pastas para projetos front-end com apenas um comando, Minifique arquivos Sass, e Reduza o tamanho das imagens, Monitore alterações em arquivos e imagens visualizando o resultado no Browser em tempo real com a ferramenta BrowserSync. 
+  Minifique arquivos Sass, Depure erros de código JavaScript enquanto desenvolve, minifique e importe modulos e arquivos JavaScript, Reduza o tamanho das imagens, Monitore alterações em arquivos e imagens visualizando o resultado no Browser em tempo real com a ferramenta BrowserSync. 
 </p>
 
 <p align="center"><b>Status</b> Finalizado</p>
@@ -24,17 +28,19 @@ Tarefas Automatizadas Gulp
 
 ---
 
-### Bibliotecas utilizadas
+## Ferramentas utilizadas
 
 - [Imagemin](https://www.npmjs.com/package/gulp-imagemin)
 - [Sass](https://www.npmjs.com/package/gulp-sass)
 - [Concat](https://www.npmjs.com/package/gulp-concat)
 - [AutoPrefixer](https://www.npmjs.com/package/gulp-autoprefixer)
 - [BrowserSync](https://www.npmjs.com/package/browser-sync)
+- [Webpack](https://webpack.js.org/)
+- [Eslint](https://eslint.org/docs/user-guide/getting-started)
 
 ---
 
-### Pré-Requisitos
+## Pré-Requisitos
 
 - [Node.js](https://nodejs.org/en/)
 - [NPM](https://www.npmjs.com/) ou [Yarn](https://yarnpkg.com/)
@@ -42,13 +48,13 @@ Tarefas Automatizadas Gulp
 
 ---
 
-### Instalação
+## Instalação
 
 Supondo que você já tenha o **Node.js** e um gerenciador de pacotes como **NPM** ou **Yarn** instalado no seu computador, siga os passos seguintes.
 
 ---
 
-#### Baixe ou Clone o Repositório
+### Baixe ou Clone o Repositório
 
 ```
 git clone https://github.com/MatheusGomesWeb/minhas-taferas-automatizadas-gulp.git
@@ -56,7 +62,7 @@ git clone https://github.com/MatheusGomesWeb/minhas-taferas-automatizadas-gulp.g
 
 ---
 
-#### Instale as dependencias do projeto
+### Instale as dependencias do projeto
 
 ```
 NPM -> npm install
@@ -68,7 +74,7 @@ YARN -> yarn install
 
 ---
 
-### Configuração
+## Configuração
 
 Todas as configurações estão localizadas no arquivo **settings.js**.
 
@@ -79,27 +85,37 @@ dist: Caminho para os arquivos de distribuição (final) do projeto.
 
 ---
 
-### Como Utilizar
+## Como Utilizar
 
-**Tarefas Disponíveis** - Para visualizar todas as tarefas digite:
+### Tarefas Gulp
 
 ```
+// Para visualizar todas as tarefas digite:
+
 gulp -T ou gulp
 ```
 
----
-
-```
-gulp watch
-```
-
-- **Tarefas Executadas**:
-  - **browserSync**: Inicia um servidor com **LiveReload**.
-  - **watch**: Monitora todos os arquivos .html, .scss, e imagens, caso tenha alguma alteração ele compila, minifica, ou reduz o tamanho dos arquivos / imagens de acordo com a ação realizada.
+- Para executar uma tarefa digite:
+  > gulp < nometarefa >
+- **browserSync**: Inicia um servidor com **LiveReload**.
+- **watch**: Monitora todos os arquivos .html, .scss, e imagens, caso tenha alguma alteração ele compila, minifica, ou reduz o tamanho dos arquivos / imagens de acordo com a ação realizada.
+- **minifyImages**: Reduz (minifica o tamanho das imagens)
+- **minifySass**: Junta arquivos sass, adiciona prefixos dos browsers e gera arquivo css final minificado.
 
 ---
 
-### Autor
+### Tarefas Webpack
+
+Para configurar o caminho dos arquivos que desenvolvimento, modifique o arquivo webpack.config.js
+
+- **Comandos Webpack**
+
+- > npm run build - Gera o arquivo final para produção (otimizado)
+- > npm run dev - Gera arquivo de desenvolvimento (não otimizado)
+
+---
+
+## Autor
 
 <a href="https://github.com/MatheusGomesWeb">
  <img style="border-radius: 50%; " src="https://avatars3.githubusercontent.com/u/12579898?s=96&v=4" width="100px; " alt=""/>
@@ -120,6 +136,6 @@ Feito com ❤️ por Matheus Gomes 👋🏽 Entre em contato!
 
 ---
 
-### :memo: Licença
+## :memo: Licença
 
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/)
