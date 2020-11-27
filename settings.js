@@ -1,8 +1,10 @@
+/* eslint-disable no-undef */
 const settings = {
   // src folder
   src: {
     source: __dirname + '/src/', // source folder
     images: __dirname + '/src/img/', // images
+    js: __dirname + '/src/js/', // javascripts
     sass: __dirname + '/src/sass/', // sass
   },
 
