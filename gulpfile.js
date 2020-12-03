@@ -55,7 +55,7 @@ function minifySass() {
 // Monitorando alterações nos arquivos (.html, .scss, .js) e imagens (.jpg, .png, .gif, .svg etc...)
 function watch() {
   // Monitorando Sass
-  gulp.watch(settings.src.sass + '*.scss').on('change', minifySass);
+  gulp.watch(settings.src.sass + '**/*.scss').on('change', minifySass);
 
   // Monitorando Imagens
   gulp.watch(settings.src.images + '**').on('change', minifyImages);
