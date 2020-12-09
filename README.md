@@ -1,7 +1,7 @@
 <div align="center">  
-<img src="./readme/gulp.png" alt="Gulp" height="80"/>
+<img src="./readme/gulp.png" alt="Gulp" height="40"/>
 <img src="./readme/eslint.png" alt="Eslint" height="40"/>
-<img src="./readme/webpack.png" alt="Webpack" height="80"/>
+<img src="./readme/webpack.png" alt="Webpack" height="40"/>
 </div>
 
 <br>
