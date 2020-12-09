@@ -21,9 +21,9 @@ function browserSync() {
 const settings = require('./settings.js');
 
 // Minificar Imagens - Gulp-Imagemin
-function minifyImages(callback) {
+function minifyImages() {
   gulp
-    .src(settings.src.images + '**')
+    .src(settings.src.images + '**/*')
     .pipe(gulp_imagemin())
     .pipe(gulp.dest(settings.dist.images))
     .pipe(browser_sync.stream());
@@ -32,18 +32,15 @@ function minifyImages(callback) {
 // Minificar Sass - Gulp-Sass
 function minifySass() {
   gulp
-    .src(settings.src.sass + '*.scss')
+    .src(settings.src.sass + '**/*.scss')
     .pipe(
       gulp_sass({
-        outputStyle: 'expanded',
+        outputStyle: 'compressed',
       })
     )
     .pipe(
       gulp_autoprefixer({
         cascade: false,
-        grid: 'autoplace',
-        flexbox: true,
-        overrideBrowserslist: ['last 99 versions'],
       })
     )
 
@@ -54,11 +51,12 @@ function minifySass() {
 
 // Monitorando alterações nos arquivos (.html, .scss, .js) e imagens (.jpg, .png, .gif, .svg etc...)
 function watch() {
-  // Monitorando Sass
+  // Monitorando Sass e js
   gulp.watch(settings.src.sass + '**/*.scss').on('change', minifySass);
+  gulp.watch(settings.src.js + '**/*.js').on('change', browser_sync.reload);
 
   // Monitorando Imagens
-  gulp.watch(settings.src.images + '**').on('change', minifyImages);
+  gulp.watch(settings.src.images + '**/*', minifyImages);
 
   // Monitorando Html
   gulp.watch('./*.html').on('change', browser_sync.reload);
