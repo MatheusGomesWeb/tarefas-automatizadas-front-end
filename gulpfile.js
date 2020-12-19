@@ -1,29 +1,30 @@
 //Gulp
-const gulp = require('gulp');
+const gulp = require("gulp");
 
 // plugins e libs
-const gulp_imagemin = require('gulp-imagemin'); // Minificar Imagens - Reduzir tamanho das imagens
-const gulp_sass = require('gulp-sass'); // Minificar Sass
-const gulp_concat = require('gulp-concat'); // Junta varios arquivos em apenas um arquivo final.
-const gulp_autoprefixer = require('gulp-autoprefixer'); // Adiciona tags do css para compatibilidade com browsers antigos.
-const browser_sync = require('browser-sync').create(); // Inicia um servidor e monitora alterações nos arquivos e atualiza o navegador automaticamente.
+const gulp_imagemin = require("gulp-imagemin"); // Minificar Imagens - Reduzir tamanho das imagens
+const gulp_sass = require("gulp-sass"); // Minificar Sass
+const gulp_concat = require("gulp-concat"); // Junta varios arquivos em apenas um arquivo final.
+const gulp_autoprefixer = require("gulp-autoprefixer"); // Adiciona tags do css para compatibilidade com browsers antigos.
+const browser_sync = require("browser-sync").create(); // Inicia um servidor e monitora alterações nos arquivos e atualiza o navegador automaticamente.
 
 // Browser-Sync
 function browserSync() {
   browser_sync.init({
     server: {
-      baseDir: __dirname + '/',
+      // baseDir: __dirname + '/',
+      baseDir: "../",
     },
   });
 }
 
 // Settings
-const settings = require('./settings.js');
+const settings = require("./settings.js");
 
 // Minificar Imagens - Gulp-Imagemin
 function minifyImages() {
   gulp
-    .src(settings.src.images + '**/*')
+    .src(settings.src.images + "**/*")
     .pipe(gulp_imagemin())
     .pipe(gulp.dest(settings.dist.images))
     .pipe(browser_sync.stream());
@@ -32,10 +33,10 @@ function minifyImages() {
 // Minificar Sass - Gulp-Sass
 function minifySass() {
   gulp
-    .src(settings.src.sass + '**/*.scss')
+    .src(settings.src.sass + "**/*.scss")
     .pipe(
       gulp_sass({
-        outputStyle: 'compressed',
+        outputStyle: "compressed",
       })
     )
     .pipe(
@@ -44,7 +45,7 @@ function minifySass() {
       })
     )
 
-    .pipe(gulp_concat('style.min.css'))
+    .pipe(gulp_concat("style.min.css"))
     .pipe(gulp.dest(settings.dist.css))
     .pipe(browser_sync.stream());
 }
@@ -52,25 +53,25 @@ function minifySass() {
 // Monitorando alterações nos arquivos (.html, .scss, .js) e imagens (.jpg, .png, .gif, .svg etc...)
 function watch() {
   // Monitorando Sass e js
-  gulp.watch(settings.src.sass + '**/*.scss').on('change', minifySass);
-  gulp.watch(settings.src.js + '**/*.js').on('change', browser_sync.reload);
+  gulp.watch(settings.src.sass + "**/*.scss").on("change", minifySass);
+  gulp.watch(settings.src.js + "**/*.js").on("change", browser_sync.reload);
 
   // Monitorando Imagens
-  gulp.watch(settings.src.images + '**/*', minifyImages);
+  gulp.watch(settings.src.images + "**/*", minifyImages);
 
   // Monitorando Html
-  gulp.watch('./*.html').on('change', browser_sync.reload);
+  gulp.watch("../*.html").on("change", browser_sync.reload);
 }
 
-const disponiveis = ['minifySass', 'minifyImages', 'watch'];
+const disponiveis = ["minifySass", "minifyImages", "watch"];
 
 // default task
 exports.default = () => {
   console.log(
-    'Tarefas Disponíveis: ' +
+    "Tarefas Disponíveis: " +
       [...disponiveis] +
-      '.\n' +
-      'Para utilizar uma tarefa execute: gulp <tarefa>'
+      ".\n" +
+      "Para utilizar uma tarefa execute: gulp <tarefa>"
   );
 };
 
