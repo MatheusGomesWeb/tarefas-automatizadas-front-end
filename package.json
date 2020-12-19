@@ -4,7 +4,7 @@
   "description": "Minhas Tarefas Automatizadas Front End",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack --mode=development",
+    "dev": "webpack --mode=development --watch",
     "build": "webpack --mode=production"
   },
   "repository": {
