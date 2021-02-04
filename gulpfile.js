@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 //Gulp
 const gulp = require("gulp");
 
@@ -54,13 +55,13 @@ function minifySass() {
 function watch() {
   // Monitorando Sass e js
   gulp.watch(settings.src.sass + "**/*.scss").on("change", minifySass);
-  gulp.watch(settings.src.js + "**/*.js").on("change", browser_sync.reload);
+  // gulp.watch(settings.src.js + "**/*.js").on("change", browser_sync.reload);
 
   // Monitorando Imagens
   gulp.watch(settings.src.images + "**/*", minifyImages);
 
   // Monitorando Html
-  gulp.watch("../*.html").on("change", browser_sync.reload);
+  // gulp.watch("../*.html").on("change", browser_sync.reload);
 }
 
 const disponiveis = ["minifySass", "minifyImages", "watch"];
@@ -76,7 +77,8 @@ exports.default = () => {
 };
 
 // Monitora alterações nos arquivos (.html, .scss, .js) e imagens (.jpg, .png, .gif, .svg etc...)
-exports.watch = gulp.parallel(browserSync, watch);
+// exports.watch = gulp.parallel(browserSync, watch);
+exports.watch = gulp.parallel(watch);
 
 // Minificar e agrupar arquivos sass
 exports.minifySass = minifySass;
