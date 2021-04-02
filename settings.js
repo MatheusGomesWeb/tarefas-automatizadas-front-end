@@ -1,18 +1,22 @@
 /* eslint-disable no-undef */
+const baseDir = "../";
+
 const settings = {
+  baseDir,
+
   // src folder
   src: {
-    source: '../src/', // source folder
-    images: '../src/img/', // images
-    js: '../src/js/', // javascripts
-    sass: '../src/sass/', // sass
+    source: `${baseDir}src/`, // source folder
+    images: `${baseDir}src/img/`, // images
+    js: `${baseDir}src/js/`, // javascripts
+    sass: `${baseDir}src/sass/`, // sass
   },
 
   // dist folder
   dist: {
-    css: '../dist/css/', // stylesheets
-    js: '../dist/js/', // javascripts
-    images: '../dist/img/', // images
+    css: `${baseDir}dist/css/`, // stylesheets
+    js: `${baseDir}dist/js/`, // javascripts
+    images: `${baseDir}dist/img/`, // images
   },
 };
 
