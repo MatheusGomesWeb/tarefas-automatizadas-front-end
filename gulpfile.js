@@ -1,87 +1,108 @@
 /* eslint-disable no-undef */
-//Gulp
 const gulp = require("gulp");
-
-// plugins e libs
-const gulp_imagemin = require("gulp-imagemin"); // Minificar Imagens - Reduzir tamanho das imagens
-const gulp_sass = require("gulp-sass"); // Minificar Sass
-const gulp_concat = require("gulp-concat"); // Junta varios arquivos em apenas um arquivo final.
-const gulp_autoprefixer = require("gulp-autoprefixer"); // Adiciona tags do css para compatibilidade com browsers antigos.
-const browser_sync = require("browser-sync").create(); // Inicia um servidor e monitora alterações nos arquivos e atualiza o navegador automaticamente.
-
-// Browser-Sync
-function browserSync() {
-  browser_sync.init({
-    server: {
-      // baseDir: __dirname + '/',
-      baseDir: "../",
-    },
-  });
-}
-
-// Settings
+const concat = require("gulp-concat");
+const sass = require("gulp-sass");
+const notify = require("gulp-notify");
+const newer = require("gulp-newer");
+const autoprefixer = require("gulp-autoprefixer");
+const imagemin = require("gulp-imagemin");
+const browserSync = require("browser-sync").create();
 const settings = require("./settings.js");
 
-// Minificar Imagens - Gulp-Imagemin
-function minifyImages() {
-  gulp
-    .src(settings.src.images + "**/*")
-    .pipe(gulp_imagemin())
-    .pipe(gulp.dest(settings.dist.images))
-    .pipe(browser_sync.stream());
+/*
+ *
+ * Nome da função: browserSyncServer
+ * Oque faz: Cria um servidor, com liveReload e oferece um ip/porta, que permite pessoas de fora, visualizar o projeto em tempo real
+ *
+ *  Validação:
+ *
+ * Observa mudanças nos arquivos html
+ * Observa mudanças nos arquivos js
+ * Recarrega o browser automaticamente a cada mudança
+ *
+ */
+
+function browserSyncServer() {
+  browserSync.init({
+    server: {
+      baseDir: settings.baseDir,
+    },
+  });
+
+  gulp.watch(`${settings.baseDir}*.html`).on("change", browserSync.reload);
+  gulp.watch(`${settings.src.js}**/*.js`).on("change", browserSync.reload);
 }
 
-// Minificar Sass - Gulp-Sass
-function minifySass() {
-  gulp
-    .src(settings.src.sass + "**/*.scss")
-    .pipe(
-      gulp_sass({
-        outputStyle: "compressed",
-      })
-    )
-    .pipe(
-      gulp_autoprefixer({
-        cascade: false,
-      })
-    )
+/*
+ *
+ * Nome da função: imageCompiler
+ * Oque faz: Minifica as imagens da pasta src, e as envia para a pasta dist.
+ *
+ * Validação:
+ *
+ * Verifica se ouve modificações na imagem.
+ * Verifica se a imagem já existe.
+ * Apenas executa a minificação em novas imagens.
+ * Apenas executa a minificação em imagens já existentes que tenham sofrido algum tipo de mudança.
+ *
+ */
 
-    .pipe(gulp_concat("style.min.css"))
-    .pipe(gulp.dest(settings.dist.css))
-    .pipe(browser_sync.stream());
+// Caminho das imagens
+const imgSrc = `${settings.src.images}/**/*`;
+const imgDist = `${settings.dist.images}`;
+
+function imageCompiler() {
+  return gulp
+    .src(imgSrc)
+    .pipe(newer(imgDist))
+    .pipe(imagemin())
+    .pipe(notify("<%= file.relative %> otimizado com sucesso !"))
+    .pipe(gulp.dest(imgDist));
 }
 
-// Monitorando alterações nos arquivos (.html, .scss, .js) e imagens (.jpg, .png, .gif, .svg etc...)
+/*
+ *
+ * Nome da função: sassCompiler
+ * Oque faz: Compilar arquivos sass e gerar arquivo css final minificado
+ *
+ * Validacão:
+ *
+ * Adiciona compatibilidade com navegadores antigos
+ * Compatibilidade com os mesmos browsers que o google oferece suporte (Lista compartilhada pelo google workspaces, browserslist)
+ * Gera arquivo style.min.css final minificado
+ * Mostra notificação (popup) ao compilar com sucesso
+ * Observa mudanças nos arquivos html e sass, e caso tenham sido alterados, recarrega o browser automaticamente.
+ *
+ */
+
+sass.compiler = require("node-sass");
+
+function sassCompiler() {
+  return gulp
+    .src(`${settings.src.sass}**/*.scss`)
+    .pipe(sass({ outputStyle: "compressed" }).on("error", sass.logError))
+    .pipe(autoprefixer({ cascade: false }))
+    .pipe(concat("style.min.css"))
+    .pipe(gulp.dest(`${settings.dist.css}`))
+    .pipe(notify("<%= file.relative %> foi gerado com sucesso !"))
+    .pipe(browserSync.stream())
+    .pipe(notify("O Browser foi recarregado"));
+}
+
+// Observa mudanças e executa o metodo correspondente
 function watch() {
-  // Monitorando Sass e js
-  gulp.watch(settings.src.sass + "**/*.scss").on("change", minifySass);
-  // gulp.watch(settings.src.js + "**/*.js").on("change", browser_sync.reload);
-
-  // Monitorando Imagens
-  gulp.watch(settings.src.images + "**/*", minifyImages);
-
-  // Monitorando Html
-  // gulp.watch("../*.html").on("change", browser_sync.reload);
+  gulp.watch(`${settings.src.sass}**/*.scss`, sassCompiler);
+  gulp.watch(`${settings.src.images}**/*`, imageCompiler);
 }
 
-const disponiveis = ["minifySass", "minifyImages", "watch"];
-
-// default task
-exports.default = () => {
+// Metodos gulp disponiveis
+exports.default = (cb) => {
   console.log(
-    "Tarefas Disponíveis: " +
-      [...disponiveis] +
-      ".\n" +
-      "Para utilizar uma tarefa execute: gulp <tarefa>"
+    "Comando desativado, utilize Gulp -T para listar as tarefas disponíveis"
   );
+
+  cb();
 };
 
-// Monitora alterações nos arquivos (.html, .scss, .js) e imagens (.jpg, .png, .gif, .svg etc...)
-// exports.watch = gulp.parallel(browserSync, watch);
-exports.watch = gulp.parallel(watch);
-
-// Minificar e agrupar arquivos sass
-exports.minifySass = minifySass;
-
-// Minificar imagens
-exports.minifyImages = minifyImages;
+// Monitora os arquivos e executa o metodo correspondente
+exports.watch = gulp.parallel(watch, browserSyncServer);

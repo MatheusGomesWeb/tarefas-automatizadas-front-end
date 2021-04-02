@@ -1,11 +1,11 @@
 {
   "name": "minhas-taferas-automatizadas-front-end",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Minhas Tarefas Automatizadas Front End",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack --mode=development --watch",
-    "build": "webpack --mode=production"
+    "dev": "npx webpack --mode=development --watch & gulp watch",
+    "build": "npx webpack --mode=production"
   },
   "repository": {
     "type": "git",
@@ -22,22 +22,22 @@
     "url": "https://github.com/MatheusGomesWeb/minhas-taferas-automatizadas-front-end/issues"
   },
   "homepage": "https://github.com/MatheusGomesWeb/minhas-taferas-automatizadas-front-end#readme",
-  "dependencies": {
-    "browser-sync": "^2.26.12",
+  "devDependencies": {
+    "browser-sync": "^2.26.14",
+    "browserslist-config-google": "^3.0.1",
+    "eslint": "^7.14.0",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0.1",
     "gulp-concat": "^2.6.1",
     "gulp-imagemin": "^7.1.0",
+    "gulp-newer": "^1.4.0",
+    "gulp-notify": "^3.2.0",
     "gulp-sass": "^4.1.0",
-    "webpack": "^5.8.0",
-    "webpack-cli": "^4.2.0"
-  },
-  "devDependencies": {
-    "eslint": "^7.14.0"
+    "node-sass": "^5.0.0",
+    "webpack": "^5.30.0",
+    "webpack-cli": "^4.6.0"
   },
   "browserslist": [
-    "last 1 version",
-    "> 1%",
-    "IE 10"
+    "extends browserslist-config-google"
   ]
 }
