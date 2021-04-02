@@ -1,20 +1,12 @@
-<div align="center">  
-<img src="./readme/gulp.png" alt="Gulp" height="40"/>
-<img src="./readme/eslint.png" alt="Eslint" height="40"/>
-<img src="./readme/webpack.png" alt="Webpack" height="40"/>
-</div>
-
-<br>
-
 <h1 align="center">
 Tarefas Automatizadas Front End
 </h1>
 
 <p align="center">
-  Minifique arquivos Sass, Depure erros de código JavaScript enquanto desenvolve, minifique e importe modulos e arquivos JavaScript, Reduza o tamanho das imagens, Monitore alterações em arquivos e imagens visualizando o resultado no Browser em tempo real com a ferramenta BrowserSync. 
+  Minifique arquivos Sass, Depure erros de código JavaScript enquanto desenvolve, minifique e importe modulos e arquivos JavaScript, Reduza o tamanho das imagens, Monitore alterações em arquivos e imagens visualizando o resultado no Browser em tempo real com a ferramenta BrowserSync, e torne o seu site compativel com navegadores antigos. 
 </p>
 
-<p align="center"><b>Status</b> Finalizado</p>
+<p align="center"><b>Status</b> Atualizado em 02 de abril de 2021</p>
 
 <p align="center">
  <a href="#bibliotecas-utilizadas">Bibliotecas Utilizadas</a> •
@@ -37,6 +29,24 @@ Tarefas Automatizadas Front End
 - [BrowserSync](https://www.npmjs.com/package/browser-sync)
 - [Webpack](https://webpack.js.org/)
 - [Eslint](https://eslint.org/docs/user-guide/getting-started)
+
+---
+
+- **Atualização 02 de abril de 2021**
+  - Atualizado todos os plugins gulp para a versão mais recente.
+  - Melhorando algoritmo de minificar imagens
+  - Apenas minificar novas imagens, ou imagens que foram modificadas.
+  - Evitando que o gulp pare de funcionar caso dê algum erro
+  - Executando gulp e webpack juntos no mesmo comando
+  - Adicionando suporte a navegadores antigos, baseado no browserslist que a google divulgou.
+
+- **Plugins adicionados**
+- [gulp-newer](https://www.npmjs.com/package/gulp-newer)
+- [gulp-notify](https://www.npmjs.com/package/gulp-notify)
+- [node-sass](https://www.npmjs.com/package/node-sass)
+- [webpack-cli](https://webpack.js.org/)
+- [browserslist-config-google](https://www.npmjs.com/package/browserslist-config-google)
+
 
 ---
 
