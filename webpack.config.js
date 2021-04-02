@@ -1,12 +1,13 @@
-const path = require('path');
-const settings = require('./settings.js');
+/* eslint-disable no-undef */
+const path = require("path");
+const settings = require("./settings.js");
 
 module.exports = {
   // Nome do arquivo que importa os modulos
-  entry: settings.src.js + 'index.js',
+  entry: settings.src.js + "index.js",
   output: {
     path: path.resolve(__dirname, settings.dist.js),
     // Nome do arquivo final
-    filename: 'bundle.js',
+    filename: "bundle.js",
   },
 };
