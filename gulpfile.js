@@ -2,7 +2,6 @@
 const gulp = require("gulp");
 const concat = require("gulp-concat");
 const sass = require("gulp-sass");
-// const notify = require("gulp-notify");
 const newer = require("gulp-newer");
 const autoprefixer = require("gulp-autoprefixer");
 const imagemin = require("gulp-imagemin");
@@ -52,14 +51,11 @@ const imgSrc = `${settings.src.images}/**/*`;
 const imgDist = `${settings.dist.images}`;
 
 function imageCompiler() {
-  return (
-    gulp
-      .src(imgSrc)
-      .pipe(newer(imgDist))
-      .pipe(imagemin())
-      //   .pipe(notify("<%= file.relative %> otimizado com sucesso !"))
-      .pipe(gulp.dest(imgDist))
-  );
+  return gulp
+    .src(imgSrc)
+    .pipe(newer(imgDist))
+    .pipe(imagemin())
+    .pipe(gulp.dest(imgDist));
 }
 
 /*
@@ -80,17 +76,13 @@ function imageCompiler() {
 sass.compiler = require("node-sass");
 
 function sassCompiler() {
-  return (
-    gulp
-      .src(`${settings.src.sass}**/*.scss`)
-      .pipe(sass({ outputStyle: "compressed" }).on("error", sass.logError))
-      .pipe(autoprefixer({ cascade: false }))
-      .pipe(concat("style.min.css"))
-      .pipe(gulp.dest(`${settings.dist.css}`))
-      // .pipe(notify("<%= file.relative %> foi gerado com sucesso !"))
-      .pipe(browserSync.stream())
-  );
-  // .pipe(notify("O Browser foi recarregado"));
+  return gulp
+    .src(`${settings.src.sass}**/*.scss`)
+    .pipe(sass({ outputStyle: "compressed" }).on("error", sass.logError))
+    .pipe(autoprefixer({ cascade: false }))
+    .pipe(concat("style.min.css"))
+    .pipe(gulp.dest(`${settings.dist.css}`))
+    .pipe(browserSync.stream());
 }
 
 // Observa mudanças e executa o metodo correspondente
