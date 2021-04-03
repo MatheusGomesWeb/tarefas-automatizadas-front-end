@@ -42,7 +42,6 @@ Tarefas Automatizadas Front End
 
 - **Plugins adicionados**
 - [gulp-newer](https://www.npmjs.com/package/gulp-newer)
-- [gulp-notify](https://www.npmjs.com/package/gulp-notify)
 - [node-sass](https://www.npmjs.com/package/node-sass)
 - [webpack-cli](https://webpack.js.org/)
 - [browserslist-config-google](https://www.npmjs.com/package/browserslist-config-google)
