@@ -28,7 +28,6 @@ Tarefas Automatizadas Front End
 - [AutoPrefixer](https://www.npmjs.com/package/gulp-autoprefixer)
 - [BrowserSync](https://www.npmjs.com/package/browser-sync)
 - [Webpack](https://webpack.js.org/)
-- [Eslint](https://eslint.org/docs/user-guide/getting-started)
 
 ---
 
@@ -39,6 +38,7 @@ Tarefas Automatizadas Front End
   - Evitando que o gulp pare de funcionar caso dê algum erro
   - Executando gulp e webpack juntos no mesmo comando
   - Adicionando suporte a navegadores antigos, baseado no browserslist que a google divulgou.
+  - Removido eslint como devDependencies
 
 - **Plugins adicionados**
 - [gulp-newer](https://www.npmjs.com/package/gulp-newer)
@@ -46,7 +46,6 @@ Tarefas Automatizadas Front End
 - [node-sass](https://www.npmjs.com/package/node-sass)
 - [webpack-cli](https://webpack.js.org/)
 - [browserslist-config-google](https://www.npmjs.com/package/browserslist-config-google)
-
 
 ---
 
