@@ -76,10 +76,27 @@ function imageCompiler() {
 sass.compiler = require("node-sass");
 
 function sassCompiler() {
+  let autoprefixBrowsers = [
+    "> 1%",
+    "last 2 versions",
+    "firefox >= 4",
+    "safari >= 5",
+    "safari >= 8",
+    "IE >= 8",
+    "IE >= 9",
+    "IE >= 10",
+    "IE >= 11",
+  ];
+
   return gulp
     .src(`${settings.src.sass}**/*.scss`)
     .pipe(sass({ outputStyle: "compressed" }).on("error", sass.logError))
-    .pipe(autoprefixer({ cascade: false }))
+    .pipe(
+      autoprefixer({
+        overrideBrowserslist: autoprefixBrowsers,
+        cascade: false,
+      })
+    )
     .pipe(concat("style.min.css"))
     .pipe(gulp.dest(`${settings.dist.css}`))
     .pipe(browserSync.stream());
