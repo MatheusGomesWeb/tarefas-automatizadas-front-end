@@ -1,5 +1,5 @@
 <h1 align="center">
-Tarefas Automatizadas Front End
+Gulp Task
 </h1>
 
 <p align="center">
